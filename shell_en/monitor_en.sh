@@ -77,7 +77,7 @@ if [ $disk_total -gt 80 ]; then
 echo "$IP disk space utilization rate exceeds 80%, WARNING!!!" | mutt -s "$IP disk space WARNING" test@yeah.net
 fi
 
-# 5. monitoring users, implement trigger when the number of users loggin' exceeds 3
+# 5. monitoring users, implement trigger when the number of current logged in users exceeds 3
 
 # current use(s)
 users=$(uptime | awk '{print $6}')
@@ -85,5 +85,5 @@ echo "current user(s): $users"
 
 # sent alert email
 if [ $users -ge 3 ]; then
-echo "$IP the number of login users are $users, WARNING!!!" | mutt -s "$IP users number WARNING" test@yeah.net
+echo "$IP the number of logged in users are $users, WARNING!!!" | mutt -s "$IP users WARNING" test@yeah.net
 fi
