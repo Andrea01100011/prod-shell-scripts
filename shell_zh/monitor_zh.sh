@@ -26,7 +26,7 @@ load_warn=0.70
 
 # 当单个核心15分钟的平均负载值大于等于1.0（即个位整数大于0） ，直接发邮件告警；如果小于1.0则进行二次比较
 if [ $average_int -gt 0 ]; then
-echo "$IP服务器15分钟的系统平均负载为$average_load，超过警戒值1.0，请立即处理！！！" | mutt -s "$IP 服务器系统负载严重告警！！！" test@yeah.net
+echo "$IP服务器15分钟的系统平均负载为$average_load，超过警戒值1.0，请立即处理！！！" | mail -s "$IP 服务器系统负载严重告警！！！" test@163.com
 fi
 
 # 当前系统15分钟平均负载值与告警值进行比较（当大于告警值0.70时会返回1，小于时会返回0 ）
@@ -34,7 +34,7 @@ load_now=$(expr $average_load \> $load_warn)
 
 # 如果系统单个核心15分钟的平均负载值大于告警值0.70（返回值为1）, 则发邮件给管理员
 if [ $load_now == 1 ]; then
-echo "$IP服务器15分钟的系统平均负载达到$average_load，超过警戒值0.70，请及时处理。" | mutt -s "$IP 服务器系统负载告警" test@yeah.net
+echo "$IP服务器15分钟的系统平均负载达到$average_load，超过警戒值0.70，请及时处理。" | mail -s "$IP 服务器系统负载告警" test@163.com
 fi
 
 # 2、监控系统cpu的情况，当使用超过80%的时候发告警邮件：
@@ -45,7 +45,7 @@ echo "当前空闲cpu: $cpu_idle%"
 
 # 设置空闲cpu的告警值为20%，如果当前cpu使用超过80%（即剩余小于20%），立即发邮件告警
 if [ $cpu_idle -lt 20 ]; then
-echo "$IP服务器cpu剩余$cpu_idle%，使用率已经超过80%，请及时处理。" | mutt -s "$IP 服务器CPU告警" test@yeah.net
+echo "$IP服务器cpu剩余$cpu_idle%，使用率已经超过80%，请及时处理。" | mail -s "$IP 服务器CPU告警" test@163.com
 fi
 
 # 3、监控系统交换分区swap的情况，当使用超过80%的时候发告警邮件：
@@ -72,7 +72,7 @@ swap_now=$(expr $swap_per \> $swap_warn)
 
 # 如果当前交换分区使用超过80%（即剩余小于20%，上面的返回值等于0），立即发邮件告警
 if [ $swap_now == 0 ]; then
-echo "$IP服务器swap交换分区只剩下 ""$swap_free"" MB 未使用，剩余不足20%，使用率已经超过80%，请及时处理。" | mutt -s "$IP 服务器内存告警" test@yeah.net
+echo "$IP服务器swap交换分区只剩下 ""$swap_free"" MB 未使用，剩余不足20%，使用率已经超过80%，请及时处理。" | mail -s "$IP 服务器内存告警" test@163.com
 fi
 
 # 4、监控系统硬盘根分区使用的情况，当使用超过80%的时候发告警邮件：
@@ -82,7 +82,7 @@ disk_total=$(df -h | grep /dev/vda1 | awk '{print $5}' | cut -d "%" -f 1)
 
 # 设置空闲硬盘容量的告警值为80%，如果当前硬盘使用超过80%，立即发邮件告警
 if [ $disk_total -gt 80 ]; then
-echo "$IP 服务器 /根分区 使用率已经超过80%，请及时处理。" | mutt -s "$IP 服务器硬盘告警" test@yeah.net
+echo "$IP 服务器 /根分区 使用率已经超过80%，请及时处理。" | mail -s "$IP 服务器硬盘告警" test@163.com
 fi
 
 # 5、监控系统用户登录的情况，当用户数超过3个的时候发告警邮件：
@@ -93,5 +93,5 @@ echo "当前用户: $users个"
 
 # 设置登录用户数的告警值为3个，如果当前用户数超过3个，立即发邮件告警
 if [ $users -ge 3 ]; then
-echo "$IP 服务器用户数已经达到$users个，请及时处理。" | mutt -s "$IP 服务器用户数告警" test@yeah.net
+echo "$IP 服务器用户数已经达到$users个，请及时处理。" | mail -s "$IP 服务器用户数告警" test@163.com
 fi
