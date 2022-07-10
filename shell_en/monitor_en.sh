@@ -24,12 +24,12 @@ average_int=$(echo $average_load | cut -d "." -f 1)
 # implement trigger when AVG load in 15min exceeds 70%
 load_warn=0.70
 if [ $average_int -gt 0 ]; then
-echo "the AVG load in 15min on server $IP is $average_load, exceeds WARNING VALUE 1.0!!!" | mutt -s "$IP system load WARNING!!!" test@yeah.net
+echo "the AVG load in 15min on server $IP is $average_load, exceeds WARNING VALUE 1.0!!!" | mail -s "$IP system load WARNING!!!" test@163.com
 fi
 
 load_now=$(expr $average_load \> $load_warn)
 if [ $load_now == 1 ]; then
-echo "the AVG load in 15min on server $IP is $average_load, exceeds 70%, CAUTION!" | mutt -s "$IP system load WARNING" test@yeah.net
+echo "the AVG load in 15min on server $IP is $average_load, exceeds 70%, CAUTION!" | mail -s "$IP system load WARNING" test@163.com
 fi
 
 # 2. CPU monitoring, implement trigger when CPU utilization rate exceeds 80%
@@ -40,7 +40,7 @@ echo "current idle cpu: $cpu_idle%"
 
 # sent alert email 
 if [ $cpu_idle -lt 20 ]; then
-echo "$IP idle cpu is $cpu_idle%, CPU utilization rate exceeds 80%, WARNING!!!" | mutt -s "$IP CPU WARNING" test@yeah.net
+echo "$IP idle cpu is $cpu_idle%, CPU utilization rate exceeds 80%, WARNING!!!" | mail -s "$IP CPU WARNING" test@163.com
 fi
 
 # 3. swap monitoring, implement trigger when swap utilization rate exceeds 80%
@@ -64,7 +64,7 @@ swap_warn=0.20
 swap_now=$(expr $swap_per \> $swap_warn)
 
 if [ $swap_now == 0 ]; then
-echo "$IP free swap space ""$swap_free"" MB, swap utilization rate exceeds 80%, WARNING!!!" | mutt -s "$IP SWAP WARNING" test@yeah.net
+echo "$IP free swap space ""$swap_free"" MB, swap utilization rate exceeds 80%, WARNING!!!" | mail -s "$IP SWAP WARNING" test@163.com
 fi
 
 # 4. disk space monitoring on the root partition, implement trigger when disk space utilization rate exceeds 80%
@@ -74,7 +74,7 @@ disk_total=$(df -h | grep /dev/vda1 | awk '{print $5}' | cut -d "%" -f 1)
 
 # sent alert email
 if [ $disk_total -gt 80 ]; then
-echo "$IP disk space utilization rate exceeds 80%, WARNING!!!" | mutt -s "$IP disk space WARNING" test@yeah.net
+echo "$IP disk space utilization rate exceeds 80%, WARNING!!!" | mail -s "$IP disk space WARNING" test@163.com
 fi
 
 # 5. monitoring users, implement trigger when the number of current logged in users exceeds 3
@@ -85,5 +85,5 @@ echo "current user(s): $users"
 
 # sent alert email
 if [ $users -ge 3 ]; then
-echo "$IP the number of logged in users are $users, WARNING!!!" | mutt -s "$IP users WARNING" test@yeah.net
+echo "$IP the number of logged in users are $users, WARNING!!!" | mail -s "$IP users WARNING" test@163.com
 fi
