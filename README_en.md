@@ -19,7 +19,7 @@ Share some shell scripts in production environment.
 # Usage
 
 - First you need to make sure that your script has the execute permission: `chmod +x script_name.sh`
-- Once your script is executable, all you need to do is to type the file name along with its absolute or relative path. Most often you are in the same directory so you just use it like this:`./脚本.sh`
+- Once your script is executable, all you need to do is to type the file name along with its absolute or relative path. Most often you are in the same directory so you just use it like this:`./script_name.sh`
 
 # Links
 
