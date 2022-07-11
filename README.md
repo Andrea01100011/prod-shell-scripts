@@ -1,5 +1,5 @@
 # prod-shell-scripts
-生产环境常用shell脚本/Linux shell scripts in production environment
+Linux shell scripts in production environment
 **简体中文** | [English](README_en.md)
 
 ---
