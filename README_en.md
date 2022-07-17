@@ -11,6 +11,7 @@ Share some shell scripts in production environment.
 # Useage
 
 1. server_monitoring: Monitor the system load, CPU, memory, disk space, and number of user logged in, and send alert emails when the numbers exceed the threshold.
+2. adduser：add a new user to the system, including building their home directory, copying in default config data, etc.
 
 # Settings
 
